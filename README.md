@@ -24,4 +24,10 @@ If i have time
     - Creating a login, so that people can have their lists synced to their accounts
         - login authorization, local storage?
     - on load, start home page of basic animation of app name, then redirect to show page
+        - options
+            - type out title
+            - do like a liquid filling up animation, then load into app
     - make it into a smartphone app?? 
+    - css styling?
+    - use icons for buttons?
+        - x for delete, pencil for edit, check for submit, < for back etc
