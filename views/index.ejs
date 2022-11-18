@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include ('./partials/head.ejs') %>
-    <title>Your Crists</title>
+        <title>Your Crists</title>
 </head>
+
 <body>
     <h1>Crists</h1>
     <p>Your Crists</p>
-    <% for (let i = 0; i < list.length; i++) { %>
-        <a href="/<%= list[i]._id %>">
-            <button>
-                <%= list[i].name %>
-            </button>
-        </a>
-    <% } %>
+    <div>
+        <% for (let i=0; i < list.length; i++) { %>
+            <a href="/<%= list[i]._id %>">
+                <button>
+                    <%= list[i].name %>
+                </button>
+            </a>
+        <% } %>
+    </div>
     <a href="/new"><button>+</button></a>
 </body>
+
 </html>
