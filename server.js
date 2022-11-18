@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const seed = require('.models/seed.js')
+const seed = require('./models/seed.js')
 const List = require('./models/list.js')
 const app = express()
 
