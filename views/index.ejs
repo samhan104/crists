@@ -7,6 +7,13 @@
 <body>
     <h1>Crists</h1>
     <p>Your Crists</p>
+    <% for (let i = 0; i < list.length; i++) { %>
+        <a href="/<%= list[i]._id %>">
+            <button>
+                <%= list[i].name %>
+            </button>
+        </a>
+    <% } %>
     <a href="/new"><button>+</button></a>
 </body>
 </html>

@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const seed = require('.models/seed.js')
 const List = require('./models/list.js')
 const app = express()
 
@@ -16,7 +17,12 @@ if(process.env.PORT){
 
 //index
 app.get('/home' , (req, res) => { //list will be shown on index. in show, list will show items within
-    res.render('index.ejs')
+    List.find({}, (error, getList) => {
+        res.render('index.ejs', 
+        {
+            list: getList
+        })
+    })
 })
 
 //new
