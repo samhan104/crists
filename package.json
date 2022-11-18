@@ -1,0 +1,22 @@
+{
+  "name": "crists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samhan104/crists.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samhan104/crists/issues"
+  },
+  "homepage": "https://github.com/samhan104/crists#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
