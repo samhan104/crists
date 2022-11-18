@@ -9,6 +9,12 @@ if(process.env.PORT){
 	PORT = process.env.PORT
 }
 
+//seed
+app.get('seed', (req,res) => {
+    List.create(seed, (error, data) => {
+        res.redirect('/home')
+      })
+})
 
 //i want '/' to be the the inital loading screen. on load, it'll display, then load /home which will show index
 // app.get('/', (req, res)=>{
