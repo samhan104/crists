@@ -10,7 +10,7 @@ if(process.env.PORT){
 }
 
 //seed
-app.get('seed', (req,res) => {
+app.get('/seed', (req,res) => {
     List.create(seed, (error, data) => {
         res.redirect('/home')
       })
