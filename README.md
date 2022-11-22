@@ -25,7 +25,9 @@ update/delete - self explanitory
 If i have time 
 
     - Creating a login, so that people can have their lists synced to their accounts
-        - login authorization, local storage?
+        - login authorization (JWT)
+
+    -bootstrap
 
     - on load, start home page of basic animation of app name, then redirect to show page
         - options
@@ -33,7 +35,7 @@ If i have time
             - do like a liquid filling up animation, then load into app
 
     - make it into a smartphone app?? 
-    
+
     - css styling?
 
     - use icons for buttons?
