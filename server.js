@@ -34,7 +34,7 @@ app.get('/new', (req, res) => {
 
 //show
 app.get('/:id/', (req, res) => {
-    List.findById(res.params.id, (error, showList) => {
+    List.findById(req.params.id, (error, showList) => {
         res.render('show.ejs', 
         {
             list: showList
@@ -52,7 +52,7 @@ app.post('/new', (req, res) => {
 
 //edit
 app.get('/:id/edit', (req, res) => {
-    List.findById(res.params.id, (error, editList) => {
+    List.findById(req.params.id, (error, editList) => {
         res.render('edit.ejs', 
         {
             list: editList
