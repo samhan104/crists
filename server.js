@@ -27,32 +27,47 @@ app.get('/' , (req, res) => { //list will be shown on index. in show, list will 
     })
 })
 
-//delete
-app.get('/new', (req, res) => {
-    res.render('new.ejs')
-})
-
-//edit
-app.get('/new', (req, res) => {
-    res.render('new.ejs')
+//show
+app.get('/:id/edit', (req, res) => {
+    List.findById(res.params.id, (error, editList) => {
+        res.render('edit.ejs', 
+        {
+            list:editList
+        })
+    })
 })
 
 //new post
 app.post('/new', (req, res) => {
-    List.create(req.body, (error, List) {
+    List.create(req.body, (error, List) => {
         res.redirect('/')
+    })
+})
+
+
+//edit
+app.get('/:id/edit', (req, res) => {
+    List.findById(res.params.id, (error, editList) => {
+        res.render('edit.ejs', 
+        {
+            list:editList
+        })
     })
 })
 
 //update
 app.put('/:id/', (request, response) => {
     List.findByIdAndUpdate(request.params.id, request.body, {new: true}, (error, updatedList) => {
-      response.render('show.ejs', {list: updatedList})
+      res.render('show.ejs', {list: updatedList})
     })
 });
 
-
-
+//delete
+app.delete('/:id/', (req, res) => {
+    List.findByIdAndRemove(req.params.id, (error, data) => {
+        res.redirect('/')
+    })
+})
 
 
 
