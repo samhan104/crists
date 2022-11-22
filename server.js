@@ -27,6 +27,11 @@ app.get('/' , (req, res) => { //list will be shown on index. in show, list will 
     })
 })
 
+//new
+app.get('/new', (req, res) => {
+    res.render('new.ejs')
+})
+
 //show
 app.get('/:id/edit', (req, res) => {
     List.findById(res.params.id, (error, editList) => {
