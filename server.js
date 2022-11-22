@@ -33,9 +33,9 @@ app.get('/new', (req, res) => {
 })
 
 //show
-app.get('/:id/edit', (req, res) => {
+app.get('/:id/', (req, res) => {
     List.findById(res.params.id, (error, showList) => {
-        res.render('edit.ejs', 
+        res.render('show.ejs', 
         {
             list: showList
         })
