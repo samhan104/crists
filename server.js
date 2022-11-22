@@ -43,7 +43,7 @@ app.get('/:id/', (req, res) => {
 })
 
 //new post
-app.post('/new', (req, res) => {
+app.post('/', (req, res) => {
     List.create(req.body, (error, List) => {
         res.redirect('/')
     })
