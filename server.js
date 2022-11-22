@@ -1,8 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 const seed = require('./models/seed.js')
 const List = require('./models/list.js')
 const app = express()
+
+app.use(express.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 
 let PORT = 3000;
 if(process.env.PORT){
@@ -68,7 +72,7 @@ app.put('/:id/', (req, res) => {
 });
 
 //delete
-app.delete('/:id/', (req, res) => {
+app.delete('/:id', (req, res) => {
     List.findByIdAndRemove(req.params.id, (error, data) => {
         res.redirect('/')
     })
