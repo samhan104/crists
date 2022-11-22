@@ -61,8 +61,8 @@ app.get('/:id/edit', (req, res) => {
 })
 
 //update
-app.put('/:id/', (request, response) => {
-    List.findByIdAndUpdate(request.params.id, request.body, {new: true}, (error, updatedList) => {
+app.put('/:id/', (req, res) => {
+    List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
       res.render('show.ejs', {list: updatedList})
     })
 });
