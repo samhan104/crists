@@ -18,6 +18,8 @@
     <form action="/<%=list.id%>?_method=DELETE" method="POST">
         <input type="submit" value="DELETE">
     </form>
-    <a href="/<%=list.id%>/edit"><button>Edit</button></a>
+    <form action="/<%=list.id%>/edit" method="GET">
+        <input type="submit" value="EDIT">
+    </form>
 </body>
 </html>
