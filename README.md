@@ -40,3 +40,19 @@ If i have time
 
     - use icons for buttons?
         - x for delete, pencil for edit, check for submit, < for back etc
+
+
+
+User creates account
+    - adds account info document to collection
+
+User logs in
+    - checks collection to see if account info is correct
+        - if correct, then logs in
+        - else, returns an error
+
+    - When logged in
+        - have the routes be under the username of the user
+            - example: example.com/username/new, etc
+        - have if/else statements to check session to see if logged in
+            - if not logged in or session expires and try to go to example.com/username/new, redirects to login page
