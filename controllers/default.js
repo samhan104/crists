@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const seed = require('./models/seed.js')
-const List = require('./models/list.js')
+const seed = require('../models/seed.js')
+const List = require('../models/list.js')
 
 
 //seed
