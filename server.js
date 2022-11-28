@@ -23,21 +23,34 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 
 
-const listController = require('./controllers/default.js')
-app.use(listController)
-const userController = require('./controllers/users_controller.js')
-app.use('/users', userController)
+// const listController = require('./controllers/default.js')
+// app.use(listController)
+// const userController = require('./controllers/user_controller.js')
+// app.use('/users', userController)
 
-app.use(
-    session({
-      secret: process.env.SECRET, 
-      resave: false, 
-      saveUninitialized: false 
-    })
-  )
+// app.use(
+//     session({
+//       secret: process.env.SECRET, 
+//       resave: false, 
+//       saveUninitialized: false 
+//     })
+//   )
   
+//=================================================
+//                      ROUTES
+//=================================================
+//index
+app.get('/' , (req, res) => { 
+    res.render('home.ejs')
+})
 
+app.get('/register' , (req, res) => { 
+    res.render('register.ejs')
+})
 
+app.post('/register' , (req, res) => { 
+    res.render('register.ejs')
+})
 
 
 //=================================================
