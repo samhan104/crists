@@ -1,20 +1,8 @@
 const express = require('express')
-const mongoose = require('mongoose')
-const app = express()
+const router = express.Router()
+const seed = require('./models/seed.js')
+const List = require('./models/list.js')
 
-app.use(express.urlencoded({extended:true}));
-app.use(methodOverride('_method'));
-
-let PORT = 3000;
-if(process.env.PORT){
-	PORT = process.env.PORT
-}
-
-app.use(express.static('public'));
-app.use(express.urlencoded({extended: true}));
-app.use(methodOverride('_method'));
-const listController = require('./controllers/default.js')
-app.use(listController)
 
 //seed
 // app.get('/seed', (req,res) => {
@@ -81,15 +69,4 @@ app.delete('/:id', (req, res) => {
     })
 })
 
-
-
-
-
-
-app.listen(PORT, ()=>{
-	console.log('listening'); 
-})
-
-mongoose.connect("mongodb+srv://samhan104:Rl0gW1tvQNsSzfsV@cluster0.gr8z5kk.mongodb.net/?retryWrites=true&w=majority", () => {
-    console.log('connected to mongo')
-})
+module.exports = lists
