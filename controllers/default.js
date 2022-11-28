@@ -5,7 +5,7 @@ const List = require('../models/list.js')
 
 
 //seed
-// app.get('/seed', (req,res) => {
+// router.get('/seed', (req,res) => {
 //     List.create(seed, (error, data) => {
 //         res.redirect('/')
 //       })
@@ -13,7 +13,7 @@ const List = require('../models/list.js')
 
 
 //index
-app.get('/' , (req, res) => { //list will be shown on index. in show, list will show items within
+router.get('/' , (req, res) => { //list will be shown on index. in show, list will show items within
     List.find({}, (error, getList) => {
         res.render('index.ejs', 
         {
@@ -23,12 +23,12 @@ app.get('/' , (req, res) => { //list will be shown on index. in show, list will 
 })
 
 //new
-app.get('/new', (req, res) => {
+router.get('/new', (req, res) => {
     res.render('new.ejs')
 })
 
 //show
-app.get('/:id/', (req, res) => {
+router.get('/:id/', (req, res) => {
     List.findById(req.params.id, (error, showList) => {
         res.render('show.ejs', 
         {
@@ -38,7 +38,7 @@ app.get('/:id/', (req, res) => {
 })
 
 //new post
-app.post('/', (req, res) => {
+router.post('/', (req, res) => {
     List.create(req.body, (error, List) => {
         res.redirect('/')
     })
@@ -46,7 +46,7 @@ app.post('/', (req, res) => {
 
 
 //edit
-app.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res) => {
     List.findById(req.params.id, (error, editList) => {
         res.render('edit.ejs', 
         {
@@ -56,14 +56,14 @@ app.get('/:id/edit', (req, res) => {
 })
 
 //update
-app.put('/:id/', (req, res) => {
+router.put('/:id/', (req, res) => {
     List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
       res.render('show.ejs', {list: updatedList})
     })
 });
 
 //delete
-app.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     List.findByIdAndRemove(req.params.id, (error, data) => {
         res.redirect('/')
     })
