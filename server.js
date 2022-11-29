@@ -53,7 +53,7 @@ app.get('/register' , (req, res) => {
 app.post('/register' , async (req, res) => { 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        User.create(req.body, (error, User) => {
+        User.create(req.body, hashedPassword, (error, User) => {
             res.redirect('/')
         }) 
     } catch (error) {
