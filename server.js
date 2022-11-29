@@ -56,7 +56,6 @@ app.post('/register' , async (req, res) => {
         User.create([{
             name: req.body.name,
             email: req.body.email,
-            username: req.body.username,
             password: hashedPassword,
         }], (error, User) => {
             res.redirect('/')
