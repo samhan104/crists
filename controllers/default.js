@@ -13,37 +13,6 @@ const List = require('../models/list.js')
 //       })
 // })
 
-//=================================================
-//          ROUTES FOR LOGIN/REGISTER
-//=================================================
-
-//index
-router.get('/login' , (req, res) => { 
-    res.render('home.ejs')
-})
-
-router.get('/register' , (req, res) => { 
-    res.render('register.ejs')
-})
-
-router.post('/', (req,res) => {
-
-})
-
-router.post('/register' , async (req, res) => { 
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        User.create([{
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword,
-        }], (error, User) => {
-            res.redirect('/login')
-        }) 
-    } catch (error) {
-        res.redirect('/register')
-    }
-})
 
 
 //=================================================
