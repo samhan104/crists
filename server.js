@@ -10,6 +10,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const bcrypt = require('bcrypt')
+const User = require('./models/users.js')
 const app = express()
 
 
@@ -48,8 +50,15 @@ app.get('/register' , (req, res) => {
     res.render('register.ejs')
 })
 
-app.post('/register' , (req, res) => { 
-    res.render('register.ejs')
+app.post('/register' , async (req, res) => { 
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        User.create(req.body, (error, User) => {
+            res.redirect('/')
+        }) 
+    } catch (error) {
+        res.redirect('/register')
+    }
 })
 
 
