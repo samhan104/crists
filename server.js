@@ -11,7 +11,6 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const bcrypt = require('bcrypt')
-const User = require('./models/users.js')
 const app = express()
 
 
@@ -21,14 +20,13 @@ const app = express()
 //=================================================
 
 app.use(express.static('public'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
 
-// const listController = require('./controllers/default.js')
-// app.use(listController)
-// const userController = require('./controllers/user_controller.js')
-// app.use('/users', userController)
+const listController = require('./controllers/default.js')
+app.use(listController)
+
 
 // app.use(
 //     session({
@@ -41,29 +39,7 @@ app.use(methodOverride('_method'));
 //=================================================
 //                      ROUTES
 //=================================================
-//index
-app.get('/' , (req, res) => { 
-    res.render('home.ejs')
-})
 
-app.get('/register' , (req, res) => { 
-    res.render('register.ejs')
-})
-
-app.post('/register' , async (req, res) => { 
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        User.create([{
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword,
-        }], (error, User) => {
-            res.redirect('/')
-        }) 
-    } catch (error) {
-        res.redirect('/register')
-    }
-})
 
 
 //=================================================
