@@ -10,12 +10,12 @@
     <h1>Edit Page</h1>
         <%=list.name%>
         <form action="/<%=list.id%>?_method=PUT" method="POST">
-        Name: <input type="text" name="name" value="<%=list.name%>"><br>
-        Items: <input type="text" name="items" value="<%=list.items[0]%>">
-        <input type="text" name="items" value="<%=list.items[1]%>">
-        <input type="text" name="items" value="<%=list.items[2]%>">
-        <input type="text" name="items" value="<%=list.items[3]%>"><br>
-        <input type="submit" value="Submit Changes">
+            Name: <input type="text" name="name" value="<%=list.name%>"><br>
+            Items: <% for (i = 0; i < list.items.length; i++) { %>
+            <input type="text" name="items" value="<%=list.items[i]%>"><br>
+            <% } %>
+            <input type="submit" value="Submit Changes">
         </form>
+        <a href="/<%=list.id%>"><button>Back</button></a>
 </body>
 </html>
