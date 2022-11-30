@@ -10,12 +10,12 @@ const flash = require('express-flash')
 const session = require('express-session')
 const User = require('../models/users.js')
 const List = require('../models/list.js')
-const initializePassport = require('../passport-config.js')
 
+const initializePassport = require('../passport-config.js')
 initializePassport(
     passport, 
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
+    email => test.find(user => user.email === email),
+    id =>  test.find(user => user.id === id),
 )
 
 router.use(express.urlencoded({extended: false}));
@@ -23,7 +23,10 @@ router.use(flash())
 router.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie:{
+        expires: 60000
+    }
 }))
 router.use(passport.initialize())
 router.use(passport.session())
@@ -35,7 +38,7 @@ router.use(passport.session())
 //       })
 // })
 
-
+const test = []
 //=================================================
 //          ROUTES FOR LOGIN/REGISTER
 //=================================================
@@ -49,27 +52,33 @@ router.get('/register' , (req, res) => {
     res.render('register.ejs')
 })
 
-router.post('/login', passport.authenticate('local', 
-{
-    successRedirect:'/',
+router.post('/login', passport.authenticate('local',{
+    successRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true,
-}
-)) 
+    failureFlash: true
+}))
 
 router.post('/register' , async (req, res) => { 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        User.create([{
+        test.push({
+            id: Date.now().toString(),
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-        }], (error, User) => {
-            res.redirect('/login')
-        }) 
-    } catch (error) {
+        })
+        // User.create([{
+        //     name: req.body.name,
+        //     email: req.body.email,
+        //     password: hashedPassword,
+        // }], (error, User) => {
+        //     res.redirect('/login')
+        // }) 
+        res.redirect('/login')
+    } catch {
         res.redirect('/register')
     }
+    console.log(test)
 })
 
 //=================================================
