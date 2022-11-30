@@ -56,3 +56,11 @@ User logs in
             - example: example.com/username/new, etc
         - have if/else statements to check session to see if logged in
             - if not logged in or session expires and try to go to example.com/username/new, redirects to login page
+
+
+3 databases
+    - one that stores created users
+    - one that stores sessions
+    - one that checks if the user has already been created, and checks if they have
+    an active session, then lets them into the rest of the file paths
+        - this database have the path of the individual username
