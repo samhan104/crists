@@ -14,8 +14,8 @@ const List = require('../models/list.js')
 const initializePassport = require('../passport-config.js')
 initializePassport(
     passport, 
-    email => User.find(({email: email}) === email),
-    id =>  User.find(({id: id}) === id),
+    email => test.find(user => User.find({email:email}) === email),
+    id =>  test.find(user => User.find({id:id}) === id),
 )
 
 router.use(express.urlencoded({extended: false}));
@@ -61,12 +61,12 @@ router.post('/login', passport.authenticate('local',{
 router.post('/register' , async (req, res) => { 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        // test.push({
-        //     id: Date.now().toString(),
-        //     name: req.body.name,
-        //     email: req.body.email,
-        //     password: hashedPassword,
-        // })
+        test.push({
+            id: Date.now().toString(),
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword,
+        })
         User.create([{
             name: req.body.name,
             email: req.body.email,
