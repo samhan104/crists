@@ -17,13 +17,13 @@ initializePassport(
 )
 
 router.use(flash)
-// router.use(
-//     session({
-//       secret: process.env.SECRET, 
-//       resave: false, 
-//       saveUninitialized: false 
-//     })
-//   )
+router.use(
+    session({
+      secret: process.env.SECRET, 
+      resave: false, 
+      saveUninitialized: false 
+    })
+  )
 router.use(passport.initialize())
 router.use(passport.session())
 //seed

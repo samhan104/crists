@@ -39,7 +39,10 @@ app.listen(process.env.PORT || 3000, ()=>{
 	console.log('listening'); 
 })
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
-const db = mongoose.connection
-db.on('error', error => console.error(error))
-db.once('open', () => console.log("Connected to mongo"))
+// mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
+// const db = mongoose.connection
+// db.on('error', error => console.error(error))
+// db.once('open', () => console.log("Connected to mongo"))
+mongoose.connect('mongodb+srv://samhan104:Rl0gW1tvQNsSzfsV@cluster0.gr8z5kk.mongodb.net/?retryWrites=true&w=majority', () => {
+  console.log('The connection with mongod is established')
+})
