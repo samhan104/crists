@@ -10,8 +10,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const List = require('./models/list.js')
-// const session = require('express-session')
-// const bcrypt = require('bcrypt')
 const app = express()
 
 
@@ -23,16 +21,26 @@ if(process.env.PORT){
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
-const listController = require('./controllers/default.js')
-app.use(listController)
 
-//seed
-app.get('/seed', (req,res) => {
-    List.create(seed, (error, data) => {
+
+// //seed
+// app.get('/seed', (req,res) => {
+//     List.create(seed, (error, data) => {
+//         res.redirect('/')
+//       })
+// })
+
+//new post
+app.post('/', (req, res) => {
+    List.create(req.body, (error, List) => {
         res.redirect('/')
-      })
+    })
 })
 
+//new
+app.get('/new', (req, res) => {
+    res.render('new.ejs')
+})
 
 //index
 app.get('/' , (req, res) => { //list will be shown on index. in show, list will show items within
@@ -44,10 +52,7 @@ app.get('/' , (req, res) => { //list will be shown on index. in show, list will 
     })
 })
 
-//new
-app.get('/new', (req, res) => {
-    res.render('new.ejs')
-})
+
 
 //show
 app.get('/:id/', (req, res) => {
@@ -59,12 +64,7 @@ app.get('/:id/', (req, res) => {
     })
 })
 
-//new post
-app.post('/', (req, res) => {
-    List.create(req.body, (error, List) => {
-        res.redirect('/')
-    })
-})
+
 
 
 //edit
@@ -83,6 +83,14 @@ app.put('/:id/', (req, res) => {
       res.render('show.ejs', {list: updatedList})
     })
 });
+
+//delete
+app.delete('/:id', (req, res) => {
+    List.findByIdAndRemove(req.params.id, (error, data) => {
+        res.redirect('/')
+    })
+})
+
 
 //=================================================
 //                   CONNECTION
