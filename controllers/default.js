@@ -74,7 +74,7 @@ router.post('/register' , async (req, res) => {
         }], (error, User) => {
             res.redirect('/login')
         }) 
-        res.redirect('/login')
+        // res.redirect('/login')
     } catch {
         res.redirect('/register')
     }
