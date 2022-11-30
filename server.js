@@ -15,94 +15,74 @@ const List = require('./models/list.js')
 const app = express()
 
 
+let PORT = 3000;
+if(process.env.PORT){
+	PORT = process.env.PORT
+}
 
-//=================================================
-//                   MIDDLEWARE
-//=================================================
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
+const listController = require('./controllers/default.js')
+app.use(listController)
 
-// app.use(express.static('public'));
-// app.use(express.urlencoded({extended: false}));
-// app.use(methodOverride('_method'));
+//seed
+// app.get('/seed', (req,res) => {
+//     List.create(seed, (error, data) => {
+//         res.redirect('/')
+//       })
+// })
 
 
-// const listController = require('./controllers/default.js')
-// app.use(listController)
-
-
-// app.use(
-//     session({
-//       secret: process.env.SECRET, 
-//       resave: false, 
-//       saveUninitialized: false 
+// //index
+// app.get('/' , (req, res) => { //list will be shown on index. in show, list will show items within
+//     List.find({}, (error, getList) => {
+//         res.render('index.ejs', 
+//         {
+//             list: getList
+//         })
 //     })
-//   )
-  
-//=================================================
-//                      ROUTES
-//=================================================
-//post new
-app.post('/', (req, res) => {
-    List.create(req.body, (error, List) => {
-      res.redirect('/')
-    })
-  });
-  
-  //delete. http verb delete
-  app.delete('/:id', (req, res) => {
-    List.findByIdAndRemove(req.params.id, (error, data) => {
-      res.redirect('/')
-    })
-  });
-  
-  //edit. http verb get
-  app.get('/:id/edit', (req, res) => {
-    List.findById(req.params.id, (error, foundList) => {
-      res.render('edit.ejs', {List: foundList})
-    })
-  });
-  
-  //update. http verb put
-  app.put('/:id/', (req, res) => {
-    List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
-      // res.redirect('/:id/', {List: updatedList})
-      res.render('show.ejs', {List: updatedList})
-    })
-  });
-  
-  //seed
-  app.get('/seed', (req, res) => {
-    List.create(ListSeed, (error, data) => {
-      res.redirect('')
-    })
-  });
-  
-  //index. http verb get
-  app.get('', (req, res) => {
-    List.find({}, (error, List) => {
-      res.render('index.ejs', 
-      {
-          list: List
-      })
-    })
-  });
-  
-  
-  //new. http verb get
-  app.get('/new', (req, res) => {
-    res.render('new.ejs')
-  });
-  
-  
-  //show. http verb get
-  app.get('/:id', (req,res) => {
-      List.findById(req.params.id, (error, List) => {
-          res.render('show.ejs', 
-          {
-              List: List
-          })
-      })
-  })
-  
+// })
+
+// //new
+// app.get('/new', (req, res) => {
+//     res.render('new.ejs')
+// })
+
+// //show
+// app.get('/:id/', (req, res) => {
+//     List.findById(req.params.id, (error, showList) => {
+//         res.render('show.ejs', 
+//         {
+//             list: showList
+//         })
+//     })
+// })
+
+// //new post
+// app.post('/', (req, res) => {
+//     List.create(req.body, (error, List) => {
+//         res.redirect('/')
+//     })
+// })
+
+
+// //edit
+// app.get('/:id/edit', (req, res) => {
+//     List.findById(req.params.id, (error, editList) => {
+//         res.render('edit.ejs', 
+//         {
+//             list: editList
+//         })
+//     })
+// })
+
+// //update
+// app.put('/:id/', (req, res) => {
+//     List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
+//       res.render('show.ejs', {list: updatedList})
+//     })
+// });
 
 //=================================================
 //                   CONNECTION
