@@ -8,6 +8,9 @@
 
 <body>
     <h1>Login</h1>
+    <% if (messages.error) {%>
+        <%= messages.error%>
+    <% } %>
     <form action="/" method="POST">
         Email: <input type="email" id="email" name="email" required><br>
         Password: <input type="password" id="password" name="password" required><br>
