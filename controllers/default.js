@@ -14,8 +14,8 @@ const List = require('../models/list.js')
 const initializePassport = require('../passport-config.js')
 initializePassport(
     passport, 
-    email => test.find(user => user.email === email),
-    id =>  test.find(user => user.id === id),
+    email => test.find(user => User.find({email:email}) === email),
+    id =>  test.find(user => User.find({id: id})=== id),
 )
 
 router.use(express.urlencoded({extended: false}));
@@ -67,13 +67,13 @@ router.post('/register' , async (req, res) => {
             email: req.body.email,
             password: hashedPassword,
         })
-        // User.create([{
-        //     name: req.body.name,
-        //     email: req.body.email,
-        //     password: hashedPassword,
-        // }], (error, User) => {
-        //     res.redirect('/login')
-        // }) 
+        User.create([{
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword,
+        }], (error, User) => {
+            res.redirect('/login')
+        }) 
         res.redirect('/login')
     } catch {
         res.redirect('/register')
