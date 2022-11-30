@@ -34,19 +34,35 @@ router.use(passport.session())
 // })
 
 //=================================================
+//              CHECKING AUTHENTICATION
+//=================================================
+const checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next()
+    } else {
+    res.redirect('/login')
+    }
+}
+const checkNotAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/')
+    } else {
+        return next()
+    }
+}
+//=================================================
 //          ROUTES FOR LOGIN/REGISTER
 //=================================================
-
 //index
-router.get('/login' , (req, res) => { 
+router.get('/login', checkNotAuthenticated, (req, res) => { 
     res.render('home.ejs')
 })
 
-router.get('/register' , (req, res) => { 
+router.get('/register', checkNotAuthenticated, (req, res) => { 
     res.render('register.ejs')
 })
 
-router.post('/', passport.authenticate('local', 
+router.post('/', checkNotAuthenticated, passport.authenticate('local', 
 {
     successRedirect:'/',
     failureRedirect: '/login',
@@ -54,8 +70,7 @@ router.post('/', passport.authenticate('local',
 }
 )) 
 
-
-router.post('/register' , async (req, res) => { 
+router.post('/register', checkNotAuthenticated, async (req, res) => { 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         User.create([{
@@ -80,8 +95,18 @@ router.get('/new', (req, res) => {
     res.render('new.ejs')
 })
 
+router.get('/', checkAuthenticated, (req, res) => {
+    List.find({}, (error, showList) => {
+        res.render('show.ejs', 
+        {
+            list: showList,
+            name: req.user.name
+        })
+    })
+})
+
 //show
-router.get('/:id/', (req, res) => {
+router.get('/:id/', checkAuthenticated , (req, res) => {
     List.findById(req.params.id, (error, showList) => {
         res.render('show.ejs', 
         {
@@ -91,7 +116,7 @@ router.get('/:id/', (req, res) => {
 })
 
 //new post
-router.post('/', (req, res) => {
+router.post('/', checkAuthenticated, (req, res) => {
     List.create(req.body, (error, List) => {
         res.redirect('/')
     })
@@ -99,7 +124,7 @@ router.post('/', (req, res) => {
 
 
 //edit
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', checkAuthenticated, (req, res) => {
     List.findById(req.params.id, (error, editList) => {
         res.render('edit.ejs', 
         {
@@ -109,17 +134,19 @@ router.get('/:id/edit', (req, res) => {
 })
 
 //update
-router.put('/:id/', (req, res) => {
+router.put('/:id/', checkAuthenticated, (req, res) => {
     List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
       res.render('show.ejs', {list: updatedList})
     })
 });
 
 //delete
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkAuthenticated, (req, res) => {
     List.findByIdAndRemove(req.params.id, (error, data) => {
         res.redirect('/')
     })
 })
+
+
 
 module.exports = router
