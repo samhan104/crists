@@ -2,7 +2,7 @@
 //                   DEPENDENCIES
 //=================================================
 
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
@@ -14,12 +14,12 @@ const app = express()
 
 
 let PORT = 3000;
-if(process.env.PORT){
-	PORT = process.env.PORT
+if (process.env.PORT) {
+    PORT = process.env.PORT
 }
 
 app.use(express.static('public'));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 
@@ -43,12 +43,12 @@ app.get('/new', (req, res) => {
 })
 
 //index
-app.get('/' , (req, res) => { //list will be shown on index. in show, list will show items within
+app.get('/', (req, res) => { //list will be shown on index. in show, list will show items within
     List.find({}, (error, getList) => {
-        res.render('index.ejs', 
-        {
-            list: getList
-        })
+        res.render('index.ejs',
+            {
+                list: getList
+            })
     })
 })
 
@@ -57,10 +57,10 @@ app.get('/' , (req, res) => { //list will be shown on index. in show, list will 
 //show
 app.get('/:id/', (req, res) => {
     List.findById(req.params.id, (error, showList) => {
-        res.render('show.ejs', 
-        {
-            list: showList
-        })
+        res.render('show.ejs',
+            {
+                list: showList
+            })
     })
 })
 
@@ -70,17 +70,17 @@ app.get('/:id/', (req, res) => {
 //edit
 app.get('/:id/edit', (req, res) => {
     List.findById(req.params.id, (error, editList) => {
-        res.render('edit.ejs', 
-        {
-            list: editList
-        })
+        res.render('edit.ejs',
+            {
+                list: editList
+            })
     })
 })
 
 //update
 app.put('/:id/', (req, res) => {
-    List.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedList) => {
-      res.render('show.ejs', {list: updatedList})
+    List.findByIdAndUpdate(req.params.id, req.body, { new: true }, (error, updatedList) => {
+        res.render('show.ejs', { list: updatedList })
     })
 });
 
@@ -95,11 +95,11 @@ app.delete('/:id', (req, res) => {
 //=================================================
 //                   CONNECTION
 //=================================================
-app.listen(process.env.PORT || 3000, ()=>{
-	console.log('listening'); 
+app.listen(process.env.PORT || 3000, () => {
+    console.log('listening');
 })
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log("Connected to mongo"))
