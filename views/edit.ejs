@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Edit Page</h1>
-        <%=list.name%>
-        <form action="/<%=list.id%>?_method=PUT" method="POST">
-            Name: <input type="text" name="name" value="<%=list.name%>"><br>
-            Items: <% for (i = 0; i < list.items.length; i++) { %>
-            <input type="text" name="items" value="<%=list.items[i]%>"><br>
-            <% } %>
-            <input type="submit" value="Submit Changes">
-        </form>
+    <div class="pageTitle">
+        <h1>Edit Page</h1>
+    </div>
+    <div class="content">
+        <div id="small">
+            <%=list.name%>
+                <form action="/<%=list.id%>?_method=PUT" method="POST">
+                    Name: <input type="text" name="name" value="<%=list.name%>"><br>
+                    Items: <% for (i=0; i < list.items.length; i++) { %>
+                        <input type="text" name="items" value="<%=list.items[i]%>"><br>
+                        <% } %>
+                            <input type="submit" value="Submit Changes">
+                </form>
+        </div>
+    </div>
+    <div class="addButton">
         <a href="/<%=list.id%>"><button>Back</button></a>
+    </div>
 </body>
+
 </html>
