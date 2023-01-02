@@ -4,28 +4,33 @@
 <head>
     <%- include ('./partials/head.ejs') %>
         <title>Your Crists</title>
+        
 </head>
 
 <body>
     <div class="container">
         <div class="pageTitle">
             <h1>Crists</h1>
+            <h3>Create Your Lists</h3>
         </div>
         <div class="content">
-            <% for (let i=0; i < list.length; i++) { %>
-                <a href="/<%= list[i].id %>">
-                    <button>
-                        <%= list[i].name %>
-                    </button>
-                </a>
-                <form action="/<%=list[i].id%>?_method=DELETE" method="POST">
-                    <input type="submit" value="DELETE">
-                </form>
-                <br>
+            <div id="small">
+                <% for (let i=0; i < list.length; i++) { %>
+                    <a href="/<%= list[i].id %>">
+                        <button>
+                            <%= list[i].name %>
+                        </button>
+                    </a>
+                    <form action="/<%=list[i].id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="DELETE">
+                    </form>
+                    <br />
+                    <br />
                 <% } %>
+            </div>
         </div>
         <div class="addButton">
-            <a id="button" href="/new"><button>+</button></a>
+            <a id="button" href="/new"><button>Add</button></a>
         </div>
     </div>
 </body>

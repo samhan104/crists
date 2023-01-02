@@ -16,13 +16,17 @@
             </h1>
         </div>
         <div class="content">
-            <ul>
-                <% for (let i=0; i < list.items.length; i++){%>
-                    <li>
-                        <%= list.items[i] %>
-                    </li>
-                    <% } %>
-            </ul>
+            <div id="small">
+                <ul>
+                    <% for (let i=0; i < list.items.length; i++){%>
+                        <li>
+                            <%= list.items[i] %>
+                        </li>
+                        <% } %>
+                </ul>
+            </div>
+        </div>
+        <div class="button">
             <a href="/<%=list.id%>/edit">
                 <button>
                     Edit
@@ -38,6 +42,7 @@
                 <input type="submit" value="DELETE">
             </form>
         </div>
+
     </div>
 </body>
 
